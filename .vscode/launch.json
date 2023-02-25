@@ -1,0 +1,12 @@
+{
+    "configurations": [
+        {
+            "name": "Debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/build",
+            "program": "${workspaceRoot}/build/TitanRTS.exe",
+            "preLaunchTask": "build"
+        }
+    ]
+}
