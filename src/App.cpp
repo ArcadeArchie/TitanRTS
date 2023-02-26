@@ -21,7 +21,7 @@ bool App::Init()
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
         return false;
 
-    gWindow = SDL_CreateWindow("TitanRTS", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 900, SDL_WINDOW_SHOWN);
+    gWindow = SDL_CreateWindow("TitanRTS", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 900, 400, SDL_WINDOW_SHOWN);
     if (gWindow == NULL)
         return false;
 
