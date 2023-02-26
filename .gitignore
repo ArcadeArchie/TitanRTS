@@ -1,5 +1,7 @@
 .vs/
 [Bb]uild/
+[Bb]in/
+[Oo]bj/
 
 CMakeLists.txt.user
 CMakeCache.txt
