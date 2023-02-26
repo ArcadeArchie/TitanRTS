@@ -13,8 +13,18 @@ namespace TitanRTS
         Color(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
         ~Color();
 
+        bool isMapped(void);
+        Uint32 getMap(void);
+        Uint8 getRed(void);
+        Uint8 getGreen(void);
+        Uint8 getBlue(void);
+        Uint8 getAlpha(void);
+        SDL_Color getAsSDL(void);
+
+        void setRGB(Uint8 m_red, Uint8 m_green, Uint8 m_blue);
+        void setRGBA(Uint8 m_red, Uint8 m_green, Uint8 m_blue, Uint8 m_alpha);
         void mapColor(SDL_PixelFormat *format);
-        SDL_Color asSDL();
+        bool equals(Color *b);
 
     protected:
         Uint8 red;
