@@ -16,18 +16,21 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${OUTPUT_DIR}")
 #SDL2 sources
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
+find_package(SDL2_ttf REQUIRED)
 
 
 
 include_directories(
     ${SDL2_INCLUDE_DIR}
     ${SDL2_IMAGE_INCLUDE_DIR}
+    ${SDL2_TTF_INCLUDE_DIR}
     ${PROJECT_SOURCE_DIR}/include
 )
 
 link_directories(
     ${SDL2_LIB_DIR}
-    ${SDL2IMAGE_LIB_DIR}
+    ${SDL2_IMAGE_LIB_DIR}
+    ${SDL2_TTF_LIB_DIR}
 )
 
 file(GLOB_RECURSE SRC "src/*.cpp" "src/*.h")
@@ -40,7 +43,7 @@ message(STATUS "")
 
 add_executable(${PROJECT_NAME} ${SRC})
 
-target_link_libraries(${PROJECT_NAME} SDL2main SDL2 SDL2_image)
+target_link_libraries(${PROJECT_NAME} SDL2main SDL2 SDL2_image SDL2_ttf)
 
 #set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 #set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
@@ -53,7 +56,7 @@ file(
 )
 
 message(STATUS "Copying all dependencies to destination folder...")
-file(GLOB PROJECT_DEPENDENCIES ${SDL2_LIBRARY}/*.dll ${SDL2_IMAGE_LIBRARY}/*.dll)
+file(GLOB PROJECT_DEPENDENCIES ${SDL2_LIBRARY}/*.dll ${SDL2_IMAGE_LIBRARY}/*.dll ${SDL2_TTF_LIBRARY}/*.dll)
 
 foreach(Dependency IN LISTS PROJECT_DEPENDENCIES)
     file(
