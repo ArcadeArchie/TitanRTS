@@ -27,12 +27,6 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/include
 )
 
-link_directories(
-    ${SDL2_LIB_DIR}
-    ${SDL2_IMAGE_LIB_DIR}
-    ${SDL2_TTF_LIB_DIR}
-)
-
 file(GLOB_RECURSE SRC "src/*.cpp" "src/*.h")
 
 message(STATUS "Add source files:")
@@ -42,8 +36,8 @@ endforeach()
 message(STATUS "")
 
 add_executable(${PROJECT_NAME} ${SRC})
-
-target_link_libraries(${PROJECT_NAME} SDL2main SDL2 SDL2_image SDL2_ttf)
+target_link_options(${PROJECT_NAME} PRIVATE -mwindows)
+target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} SDL2_ttf)
 
 #set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 #set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
@@ -54,13 +48,3 @@ file(
     COPY assets
     DESTINATION ${OUTPUT_DIR}
 )
-
-message(STATUS "Copying all dependencies to destination folder...")
-file(GLOB PROJECT_DEPENDENCIES ${SDL2_LIBRARY}/*.dll ${SDL2_IMAGE_LIBRARY}/*.dll ${SDL2_TTF_LIBRARY}/*.dll)
-
-foreach(Dependency IN LISTS PROJECT_DEPENDENCIES)
-    file(
-        COPY ${Dependency}
-        DESTINATION ${OUTPUT_DIR}
-    )
-endforeach()
