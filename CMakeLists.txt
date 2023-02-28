@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.21)
 project(TitanRTS VERSION 0.1.0)
 
+option(TITANRTS_USE_EXTERNAL_JSON "Use an external JSON library" OFF)
+
 set (CMAKE_CXX_STANDARD 20)
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 set(CMAKE_INCLUDE_PATH ${PROJECT_SOURCE_DIR}/include)
@@ -9,6 +11,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${OUTPUT_DIR}")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${OUTPUT_DIR}")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${OUTPUT_DIR}")
 
+add_subdirectory(external)
 
 #include(CTest)
 #enable_testing()
@@ -17,7 +20,6 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${OUTPUT_DIR}")
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 find_package(SDL2_ttf REQUIRED)
-
 
 
 include_directories(
@@ -37,7 +39,7 @@ message(STATUS "")
 
 add_executable(${PROJECT_NAME} ${SRC})
 target_link_options(${PROJECT_NAME} PRIVATE -mwindows)
-target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} SDL2_ttf)
+target_link_libraries(${PROJECT_NAME} PRIVATE ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} SDL2_ttf nlohmann_json::nlohmann_json)
 
 #set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 #set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
