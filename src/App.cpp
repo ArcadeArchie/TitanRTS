@@ -1,16 +1,20 @@
 #include "App.h"
 #include "SDL2/SDL.h"
 #include <iostream>
+#include "Core/Config/AppConfig.h"
 
+using namespace Core;
 
 void App::Run()
 {
+    Config::AppConfig cfg = Config::AppConfig::from_file("assets/appCfg.ini");
     SDL_Event e;
+    int quitSig = std::stoi(cfg["QuitSig"]);
     while (!quit)
     {
         while (SDL_PollEvent(&e))
         {
-            if (e.type == SDL_QUIT)
+            if (e.type == quitSig)
                 quit = true;
         }
     }
